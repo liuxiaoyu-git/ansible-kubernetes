@@ -1,0 +1,17 @@
+- hosts: localhost
+  gather_facts: false
+
+  tasks:
+  - name: Try to login to OCP cluster
+    k8s_auth:
+      host: https://api.cluster-shang-b982.shang-b982.example.opentlc.com:6443
+      username: opentlc-mgr
+      password: r3dh4t1!
+      validate_certs: no
+    register: k8s_auth_result
+    
+  - name: Create a Deployment by reading the definition from a local file
+    k8s:
+      namespace: testing
+      state: present
+      src: ~/ansible/hello-openshift.yml
