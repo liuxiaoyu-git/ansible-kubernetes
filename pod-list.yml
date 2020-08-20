@@ -1,0 +1,15 @@
+- hosts: localhost
+  gather_facts: false
+  
+  tasks:
+  - name: Try to login to OCP cluster
+    k8s_auth:
+      host: https://api.cluster-shang-b982.shang-b982.example.opentlc.com:6443
+      username: opentlc-mgr
+      password: r3dh4t1!
+      validate_certs: no
+    register: k8s_auth_result
+    
+  - name: Print pod list
+    debug:
+      msg: "pod_list: {{ pod_list | json_query('resources[*].metadata.name')  }}"
