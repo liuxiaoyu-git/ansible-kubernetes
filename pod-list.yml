@@ -8,7 +8,7 @@
   - name: Try to login to OCP cluster
     k8s_auth:
       host: "{{ ocp_master }}"
-      username: opentlc-mgr
+      username: "{{ ocp_username }}"
       password: "{{ ocp_password }}"
       validate_certs: no
     register: k8s_auth_result
