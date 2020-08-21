@@ -15,3 +15,4 @@
       namespace: testing
       state: present
       src: ~/ansible/hello-openshift.yml
+      api_key: "{{ k8s_auth_result.k8s_auth.api_key }}"
