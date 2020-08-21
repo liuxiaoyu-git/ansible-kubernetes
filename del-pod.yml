@@ -10,9 +10,10 @@
       validate_certs: no
     register: k8s_auth_result
 
-  - name: Get a list of all pods from any namespace
+  - name: Get a list of all pods from testing
     k8s_info:
       namespace: testing
+      api_key: "{{ k8s_auth_result.k8s_auth.api_key }}
       kind: Pod
     register: pod_list
 
@@ -22,5 +23,6 @@
       api_version: v1
       kind: Pod
       namespace: testing
+      api_key: "{{ k8s_auth_result.k8s_auth.api_key }}
       name: "{{ item }}"
     loop: "{{ pod_list | json_query('resources[*].metadata.name') }}"
