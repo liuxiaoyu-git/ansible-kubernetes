@@ -2,11 +2,12 @@
   gather_facts: false
   vars_files:
   - mysecrets
-  
+  - myvars
+
   tasks:
   - name: Try to login to OCP cluster
     k8s_auth:
-      host: https://api.cluster-shang-b982.shang-b982.example.opentlc.com:6443
+      host: "{{ ocp_master }}"
       username: opentlc-mgr
       password: "{{ ocp_password }}"
       validate_certs: no
